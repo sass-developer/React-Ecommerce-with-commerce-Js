@@ -9,11 +9,8 @@ function App() {
   const [categories,setCategories] = useState([])
   const [loading,setLoading] = useState(false)
   const [cart,setCart] = useState({})
-  const [name, setName] = useState('');
-  const [Sort,setSort] =useState("")
 
 
-  console.log(categories)
   const fetchProducts = async()=>{
     setLoading(true)
     const {data} = await commerce.products.list()
@@ -21,20 +18,6 @@ function App() {
     setLoading(false)
   }
 
-  const filter = (e) => {
-    const keyword = e.target.value;
-    if (keyword !== '') {
-      const results = filteredData.filter((product) => {
-
-        return product.name.toLowerCase().includes(keyword.toLowerCase()) 
-      });
-      setProducts(results);
-    } else {
-      setProducts(products);
-    }
-    setName(keyword);
-  }
-  
 
   const fetchCart= async(productId)=>{
     setLoading(true)
@@ -42,20 +25,6 @@ function App() {
     setCart(cart)
     setLoading(false)
 
-  }
-  const AtoZ = ()=>{
-    setLoading(true)
-    const AtoZ =  products.sort(function (a, b) {
-        if (a.name < b.name) {
-          return -1;
-        }
-        if (a.name > b.name) {
-          return 1;
-        }
-        return 0;
-      });
-      setProducts(AtoZ)
-      setLoading(false)
   }
 
   const fetchCategories = async()=>{
